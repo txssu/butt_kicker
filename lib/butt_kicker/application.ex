@@ -9,6 +9,7 @@ defmodule ButtKicker.Application do
   def start(_type, _args) do
     children = [
       ButtKickerWeb.Telemetry,
+      {Finch, name: ButtKicker.Client},
       {DNSCluster, query: Application.get_env(:butt_kicker, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ButtKicker.PubSub},
       # Start a worker by calling: ButtKicker.Worker.start_link(arg)

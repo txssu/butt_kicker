@@ -7,5 +7,7 @@ defmodule ButtKickerWeb.Router do
 
   scope "/api", ButtKickerWeb do
     pipe_through :api
+
+    post "/kick", KickController, :kick
   end
 end

@@ -1,0 +1,24 @@
+services:
+  butt-kicker:
+    build:
+      context: .
+    depends_on:
+      - watchtower
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?SECRET_KEY_BASE is required}
+    ports:
+      - 4000:4000
+    profiles:
+      - app
+    restart: unless-stopped
+
+  watchtower:
+    command: --debug --http-api-update --no-pull --no-restart
+    environment:
+      - WATCHTOWER_HTTP_API_TOKEN=secret-token
+    image: containrrr/watchtower
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
