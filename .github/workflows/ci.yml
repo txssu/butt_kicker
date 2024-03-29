@@ -75,10 +75,5 @@ jobs:
         env:
           MIX_ENV: test
 
-      - name: Setup database
-        run: mix ecto.setup
-        env:
-          MIX_ENV: test
-
       - name: Run tests
         run: mix test --cover
