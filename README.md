@@ -1,18 +1,41 @@
 # ButtKicker
 
-To start your Phoenix server:
+ButtKicker is a lightweight stateless webhook gateway designed to efficiently redirect triggers to the desired endpoints.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Usage
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### 1. Running ButtKicker
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+To run ButtKicker, use Docker:
 
-## Learn more
+```sh
+docker run \
+  -p 4000:4000 \
+  -e SECRET_KEY_BASE=some-random-string \
+  ghcr.io/txssu/butt_kicker:latest
+```
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Ensure to replace `some-random-string` with your preferred secret key.
+
+### 2. Building URL
+
+Use the provided script `build_url.exs` to build the URL:
+
+```sh
+./build_url.exs 'https://example.com/' \
+  '{"method": "get", "url": "http://watchtower:8080/v1/update", "headers": {"Authorization": "Bearer secret-token"}}'
+```
+
+Replace the example URLs and tokens with your actual endpoints and authentication details.
+
+### 3. Integration
+
+Once you have the built URL, integrate it with your preferred CI/CD service, such as GitHub Actions, Jenkins, or GitLab CI, to trigger the desired actions based on events.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
